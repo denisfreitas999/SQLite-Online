@@ -1,0 +1,7 @@
+ID_Disciplina,Nome_Disciplina,Descricao,Carga_Horaria,ID_Professor
+1,Matematica,Estudo de conceitos matematicos avançados,60,1
+2,Historia,Historia mundial e local,45,2
+3,Fisica,Principios fundamentais da fisica,60,1
+4,Quimica,Estudo da quimica e suas aplicações,45,3
+5,Ingles,Aulas de ingles para iniciantes,45,4
+6,Artes,Exploraçãoo da criatividade artistica,30,5

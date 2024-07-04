@@ -250,3 +250,20 @@ SELECT *
 
 -- Criando apelidos (ALIAS):
 SELECT informacoes_de_contato AS email_cliente from tabelaclientes;
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 05 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Atualizando dados - UPDATE
+UPDATE tabelapedidos SET status = 'Enviado' where status = 'Processando';
+
+UPDATE tabelaclientes 
+	SET informacoes_de_contato = 'denisson@exemaple', endereco_cliente = 'Alameda das aves, 77'
+    where id_cliente = 1; 
+
+-- Deletando dados - DELETE
+
+DELETE from tabelafornecedores WHERE país_de_origem = 'Turquia';
+
+DELETE from tabelafornecedores where id > 35;
