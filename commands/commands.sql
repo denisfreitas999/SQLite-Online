@@ -80,9 +80,11 @@ CREATE table tabelaprodutos (
   FOREIGN KEY (Categoria) REFERENCES tabelacategorias (id_categoria),
   FOREIGN KEY (Fornecedor) REFERENCES tabelafornecedores (id)
 );
+
 -- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 -- ################### ETAPA 03 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 -- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 -- Inserindo dados dentro da tabela clientes
 INSERT INTO tabelaclientes (
     id_cliente,
@@ -195,3 +197,56 @@ SELECT
     data_de_envio_estimada
 FROM tabelapedidos
 WHERE total_do_pedido >= 400;
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 04 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Realizando buscas com operadores lógicos
+SELECT * FROM tabelapedidos WHERE total_do_pedido > 200;
+SELECT * FROM tabelapedidos WHERE total_do_pedido >= 200;
+SELECT * FROM tabelapedidos WHERE total_do_pedido <= 200;
+SELECT * FROM tabelapedidos WHERE total_do_pedido < 200;
+SELECT * FROM tabelapedidos WHERE total_do_pedido <> 200;
+SELECT * FROM tabelapedidos WHERE total_do_pedido = 200;
+
+-- Operadores lógicos e strings
+SELECT * FROM tabelaclientes WHERE nome_cliente > 'C';
+
+-- Operadores lógicos e datas
+SELECT * FROM tabelapedidos WHERE data_do_pedido > '2023-09-19';
+
+-- Filtros compostos - AND, OR, NOT e BETWEEN
+SELECT * FROM tabelapedidos WHERE total_do_pedido >= 200 AND Status = 'Pendente';
+SELECT * from tabelapedidos where status = 'Pendente' OR status = 'Processando';
+SELECT * from tabelapedidos where not status = 'Pendente';
+SELECT * 
+	from tabelapedidos 
+    where data_de_envio_estimada 
+    BETWEEN '2023-08-01' 
+    and '2023-09-01';
+
+--  Ordenando os dados - ORDER BY
+SELECT * 
+	from tabelaprodutos 
+	where preco_de_compra >= 200 
+    and preco_de_compra <= 600
+    order BY nome_produto;
+
+-- Ordenando com DESC e ASC
+SELECT * 
+	from tabelaprodutos 
+	where preco_de_compra >= 200 
+    and preco_de_compra <= 600
+    order BY nome_produto
+    ASC;
+
+SELECT * 
+	from tabelaprodutos 
+	where preco_de_compra >= 200 
+    and preco_de_compra <= 600
+    order BY nome_produto
+    DESC;
+
+-- Criando apelidos (ALIAS):
+SELECT informacoes_de_contato AS email_cliente from tabelaclientes;
