@@ -110,3 +110,37 @@ select instituicao, COUNT(curso) qtd_cursos
 -- ############ ????????????????????????????? #################
 
 
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 04 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+-- Utilizando o LENGTH para contar a quantidade de caracteres de uma string
+SELECT nome, LENGTH(cpf) qtd_char_cpf
+  FROM Colaboradores
+  WHERE qtd_char_cpf = 11;
+  
+SELECT COUNT(*), LENGTH(cpf) qtd_char_cpf
+  FROM Colaboradores
+  WHERE qtd_char_cpf = 11;
+  
+ SELECT COUNT(*)
+  FROM Colaboradores;
+
+-- Concatenando informações com o double pipe || (Alguns SGBDS utilizam o CONCAT)
+SELECT ('A pessoa colaboradora ' || nome || ' de CPF ' || cpf || ' possui o seguinte endereço: '
+            || endereco) AS Informacoes_Colaborador
+            FROM Colaboradores;
+
+-- Trabalhando com formatação de datas
+SELECT id_colaborador, STRFTIME('%d/%m/%Y') from Licencas;
+
+-- Intervalo de tempo com o JULIANDAY
+SELECT id_colaborador, JULIANDAY (datatermino) - JULIANDAY (datacontratacao)
+	FROM HistoricoEmprego
+	WHERE datatermino IS NOT NULL;
+
+-- Funções numéricas CEIL, FLOOR e ROUND
+SELECT AVG(faturamento_bruto), ROUND (AVG(faturamento_bruto),2) FROM faturamento;
+SELECT faturamento_bruto, CEIL(faturamento_bruto) FROM faturamento;
+SELECT FLOOR(faturamento_bruto), CEIL(faturamento_bruto) FROM faturamento;
