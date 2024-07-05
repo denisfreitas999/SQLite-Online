@@ -144,3 +144,23 @@ SELECT id_colaborador, JULIANDAY (datatermino) - JULIANDAY (datacontratacao)
 SELECT AVG(faturamento_bruto), ROUND (AVG(faturamento_bruto),2) FROM faturamento;
 SELECT faturamento_bruto, CEIL(faturamento_bruto) FROM faturamento;
 SELECT FLOOR(faturamento_bruto), CEIL(faturamento_bruto) FROM faturamento;
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 05 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Função CAST
+SELECT (' O faturamento bruto médio foi ' || CAST(ROUND (AVG(faturamento_bruto),2) AS TEXT))
+	FROM faturamento;
+
+-- Utilizando a expressão CASE
+SELECT id_colaborador, cargo, salario,
+CASE
+WHEN salario < 3000 THEN 'Baixo'
+WHEN salario BETWEEN 3000 AND 6000 THEN 'Médio'
+ELSE 'Alto'
+END AS categoria_salario
+FROM HistoricoEmprego;
+
+-- Utilizando o RENAME
+ALTER TABLE HistoricoEmprego RENAME TO CargosColaboradores;
