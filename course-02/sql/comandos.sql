@@ -36,6 +36,9 @@ SELECT * from Treinamento
 SELECT * from Treinamento
 	where curso LIKE '%realizar%';
 
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 02 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 -- Utilizando AND
 SELECT * from HistoricoEmprego 
@@ -59,4 +62,51 @@ SELECT * from HistoricoEmprego
 SELECT * FROM Treinamento
 	WHERE (curso LIKE 'O direito%' AND instituicao = 'da Rocha')
 	OR (curso LIKE 'O conforto%' AND instituicao = 'das Neves')
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 03 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Utilizando o MIN para capturar o mês com menor faturamento
+SELECT mes, MIN(faturamento_bruto) FROM faturamento;
+
+-- Utilizando o MAX para capturar o mês com maior faturamento
+SELECT mes, MAX(faturamento_bruto) FROM faturamento;
+
+-- Utilizando o SUM para capturar o número de novos clientes de 2023
+SELECT SUM(numero_novos_clientes) AS 'Novos clientes 2023' from faturamento
+	WHERE mes like '%2023';
+
+-- Utilizando o AVG para calcular a média de lucro líquido da empresa
+SELECT AVG(lucro_liquido) from faturamento;
+
+-- Utilizando o COUNT para descobrir quantos colaboradores estão desempregados
+SELECT COUNT(*) FROM HistoricoEmprego
+	WHERE datatermino NOT NULL;
+
+-- Utilizando o group by para trazer conjunto de informações de uma coluna específica
+SELECT parentesco FROM Dependentes
+GROUP BY parentesco;
+
+-- Utilizando o group by para trazer conjunto de informações de uma coluna específica
+-- Utilizando o count para trazer o número de ocorrências
+SELECT parentesco, COUNT(*) FROM Dependentes
+GROUP BY parentesco;
+
+-- Utilizando a cláusula HAVING para adicionar condições de agregadores
+select instituicao, COUNT(curso) as 'QTD Cursos' 
+	from Treinamento
+    GROUP BY(instituicao)
+    HAVING COUNT(curso) > 2;
+
+select instituicao, COUNT(curso) qtd_cursos 
+	from Treinamento
+    GROUP BY(instituicao)
+    HAVING qtd_cursos > 2;
+
+-- ############ ????????????????????????????? ################
+-- A ordem das cláusulas em uma consulta SQL é importante: 
+-- SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY.
+-- ############ ????????????????????????????? #################
+
 
