@@ -69,3 +69,59 @@ SELECT nome, preco
     HAVING preco > (
     	SELECT AVG(preco) FROM produtos
     );
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 03 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Utilizando o inner join
+select nome, p.id, p.datahorapedido
+  from clientes c
+  inner join pedidos p 
+  on c.id = p.idcliente;
+
+-- Utilizando o right join
+SELECT * FROM produtos;
+SELECT * from itenspedidos;
+
+SELECT pr.nome, ip.idproduto, ip.idpedido
+  FROM itenspedidos ip
+  RIGHT JOIN produtos pr
+  ON pr.id = ip.idproduto;
+
+-- Usando o left join
+INSERT INTO Clientes (id, Nome, Telefone, Email, Endereco)
+VALUES (28, 'João Santos', '215555678', 'joao.santos@email.com', 'Avenida Principal, 456, Cidade B'),
+       (29, 'Carla Ferreira', '315557890', 'carla.ferreira@email.com', 'Travessa das Ruas, 789, Cidade C');
+       
+SELECT * from clientes;
+
+SELECT cl.nome, pd.id AS id_pedido
+	from clientes cl 
+    left join pedidos pd
+    on cl.id = pd.idcliente;
+
+-- Buscando os clientes que não fizeram pedidos no mês 10
+SELECT cl.nome, x.id AS id_pedido
+	from clientes cl 
+    left join (
+      SELECT pd.id, pd.idcliente
+      from pedidos pd
+      where strftime('%m', pd.datahorapedido) = '10'
+    ) x
+    on cl.id = x.idcliente
+    where id_pedido is NULL;
+    
+-- Utilizando o FULL JOIN
+-- Traz todos os pedidos cujo cliente é nulo
+SELECT c.nome, p.id 
+  FROM clientes c
+  FULL JOIN pedidos p
+  ON c.id = p.idcliente
+  WHERE c.id IS NULL;
+-- Traz todos os clientes cujo pedido é nulo
+SELECT c.nome, p.id 
+  FROM clientes c
+  FULL JOIN pedidos p
+  ON c.id = p.idcliente
+  WHERE p.id IS NULL;
