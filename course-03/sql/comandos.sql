@@ -125,3 +125,112 @@ SELECT c.nome, p.id
   FULL JOIN pedidos p
   ON c.id = p.idcliente
   WHERE p.id IS NULL;
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 04 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- calcule o valor total de cada pedido
+
+-- Verificar tabelas
+SELECT * from pedidos;
+SELECT * from itenspedidos;
+
+-- Unir as tabelas com correspondência 
+SELECT * 
+	from pedidos pd
+    join itenspedidos ip
+    on pd.id = ip.idpedido;
+    
+-- Simplificando consulta 
+SELECT pd.id as id_pedido, ip.quantidade, ip.precounitario
+	from pedidos pd
+    join itenspedidos ip
+    on pd.id = ip.idpedido;
+    
+--  Unindo a tabela de produtos para verificar se o preço unitário é igual ao preço do produto
+SELECT pd.id as id_pedido, ip.quantidade,  pr.preco, ip.precounitario
+	from pedidos pd
+    join itenspedidos ip
+    on pd.id = ip.idpedido
+    JOIN produtos pr
+    on ip.idproduto = pr.id;
+
+--  Unindo a tabela clientes para trazer o nome dos clientes
+-- calcula o valor da soma_pedido
+SELECT cl.nome, pd.id as id_pedido, SUM(ip.precounitario) AS soma_pedido
+	from pedidos pd
+    join itenspedidos ip on pd.id = ip.idpedido
+    join clientes cl on pd.idcliente = cl.id
+    GROUP by pd.id, cl.nome;
+    
+-- Criando VIEW para ter acesso a uma tabela virtual da consulta feita anteriormente
+CREATE VIEW ViewSomaPedido AS
+  SELECT cl.nome, pd.id as id_pedido, SUM(ip.precounitario) AS soma_pedido
+      from pedidos pd
+      join itenspedidos ip on pd.id = ip.idpedido
+      join clientes cl on pd.idcliente = cl.id
+      GROUP by pd.id, cl.nome;
+
+-- Consultando a View
+select * from ViewSomaPedido;
+
+-- Trabalhando com a view
+SELECT nome FROM ViewValorTotalPedido
+  WHERE ValorTotalPedido = 10;
+
+SELECT nome FROM ViewValorTotalPedido
+  WHERE ValorTotalPedido > 10;
+
+SELECT nome FROM ViewValorTotalPedido
+  WHERE ValorTotalPedido > 10 AND ValorTotalPedido < 14;
+
+SELECT nome FROM ViewValorTotalPedido
+  WHERE strftime('%m', datahorapedido) = '08'
+
+
+--  calculando o valor do faturamento diário, ou seja, o valor dos pedidos que foram feitos por dia
+SELECT DATE datahorapedido AS Dia, SUM(ip.precounitario) AS FaturamentoDiario
+  FROM pedidos p
+  JOIN itenspedidos ip
+  ON p.id = ip.idpedido
+  GROUP BY Dia
+  ORDER BY Dia;
+
+-- Criando tabela de faturamento diário
+CREATE TABLE FaturamentoDiario (
+    Dia DATE,
+    FaturamentoTotal DECIMAL(10, 2)
+);
+
+-- Criando TRIGGER
+CREATE TRIGGER CalculaFaturamentoDiario
+AFTER INSERT ON itenspedidos
+FOR EACH ROW
+BEGIN
+  DELETE FROM FaturamentoDiario;
+  
+  INSERT INTO FaturamentoDiario (Dia, FaturamentoTotal)
+  SELECT DATE(p.datahorapedido) AS Dia, SUM(ip.precounitario * ip.quantidade) AS FaturamentoTotal
+  FROM pedidos p
+  JOIN itenspedidos ip ON p.id = ip.idpedido
+  GROUP BY DATE(p.datahorapedido);
+END;
+
+-- Inserindo valores para testar a execução do TRIGGER
+SELECT * FROM FaturamentoDiario;
+
+SELECT * FROM pedidos;
+
+SELECT * FROM itenspedidos;
+
+INSERT INTO Pedidos(id, idcliente, datahorapedido, status)
+VALUES (451, 27, '2023-10-07 14:30:00', 'Em Andamento');
+
+INSERT INTO itenspedidos(idpedido, idproduto, quantidade, precounitario)
+VALUES (451, 14, 1, 6.0),
+       (451, 13, 1, 7.0);
+       
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 05 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
