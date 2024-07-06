@@ -1,10 +1,10 @@
 # Projeto: Formação Conhecendo o SQL Overview
 
-#### Course 01: SQLite online - Conhecendo instruções SQL (01 - 05);
+#### Course 01: SQLite online - Conhecendo instruções SQL (01 - 05)
 #### Course 02: SQLite Online - executando consultas SQL (06 - 10)
+#### Course 03: Realizando consultas com SQL: Joins, Views e transações (11 - 15)
 
 ## Índice
-
 1. [Primeiros Passos com SQLite](#1-primeiros-passos-com-sqlite)
 2. [Manipulação de Tabelas](#2-manipulação-de-tabelas)
 3. [Inserção de Dados](#3-inserção-de-dados)
@@ -15,6 +15,11 @@
 8. [Funções de Agregação e Agrupamento](#8-funções-de-agregação-e-agrupamento)
 9. [Funções de String, Data e Numéricas](#9-funções-de-string-data-e-numéricas)
 10. [Expressões CASE e Renomeação](#10-expressões-case-e-renomeação)
+11. [Criação e Importação de Dados com Default](#11-criação-e-importação-de-dados-com-default)
+12. [Criação e Importação de Dados com Default](#12-criação-e-importação-de-dados-com-default)
+13. [Joins: INNER, RIGHT, LEFT e FULL](#13-joins-inner-right-left-e-full)
+14. [VIEWs e TRIGGERs](#14-views-e-triggers)
+15. [Transações e Operações de Dados](#15-transações-e-operações-de-dados)
 
 ## 1. Primeiros Passos com SQLite
 
@@ -97,3 +102,45 @@ Nesta etapa, foco no uso de expressões condicionais e renomeação de objetos:
 
 - **Usar a expressão CASE**: Implementar lógica condicional dentro de consultas SQL utilizando a expressão CASE.
 - **Utilizar a cláusula RENAME**: Renomear tabelas e colunas utilizando a cláusula RENAME.
+
+## 11. Criação e Importação de Dados com Default
+
+Nesta etapa, foco na criação de tabelas com valores padrão e na importação de dados:
+
+- **Criar tabelas utilizando default**: Definir valores padrão para colunas ao criar tabelas.
+- **Inserir dados em tabelas com default**: Inserir dados em tabelas aproveitando os valores padrão definidos.
+- **Realizar a importação de arquivos CSV para popular o banco de dados**: Importar dados de arquivos CSV para tabelas no banco de dados.
+
+## 12. Criação e Importação de Dados com Default
+
+Nesta etapa, foco na repetição prática da criação de tabelas com valores padrão e na importação de dados:
+
+- **Criar tabelas utilizando default**: Reforçar o aprendizado na definição de valores padrão para colunas.
+- **Inserir dados em tabelas com default**: Continuar a prática de inserção de dados em tabelas com valores padrão.
+- **Realizar a importação de arquivos CSV para popular o banco de dados**: Repetir o processo de importação de dados de arquivos CSV para tabelas.
+
+## 13. Joins: INNER, RIGHT, LEFT e FULL
+
+Nesta etapa, foco na utilização de diferentes tipos de joins em consultas SQL:
+
+- **Conhecer como utilizar o INNER JOIN**: Realizar junções internas para combinar dados de múltiplas tabelas.
+- **Aprender a trabalhar com o RIGHT e LEFT JOIN**: Executar junções à direita e à esquerda para incluir todos os registros de uma tabela.
+- **Executar consultas com FULL JOIN**: Utilizar junções completas para incluir todos os registros de ambas as tabelas, combinando onde houver correspondência.
+
+## 14. VIEWs e TRIGGERs
+
+Nesta etapa, foco na criação e utilização de VIEWs e TRIGGERs:
+
+- **Conhecer como criar VIEWs**: Definir vistas (VIEWs) para simplificar consultas complexas.
+- **Utilizar VIEWs em consultas**: Implementar VIEWs em consultas SQL para acessar dados de maneira simplificada.
+- **Criar TRIGGER com INSERT**: Definir gatilhos (TRIGGERs) que executam automaticamente ao inserir dados.
+- **Entender como acionar uma TRIGGER**: Compreender o mecanismo de acionamento de TRIGGERs em resposta a eventos específicos.
+
+## 15. Transações e Operações de Dados
+
+Nesta etapa, foco na manipulação avançada de dados e no controle de transações:
+
+- **Atualizar dados utilizando o UPDATE**: Modificar registros existentes em tabelas utilizando o comando UPDATE.
+- **Executar exclusão dos dados com o DELETE CASCADE**: Remover registros de tabelas com exclusão em cascata.
+- **Conhecer sobre transações**: Compreender o conceito de transações no contexto de bancos de dados.
+- **Iniciar transações e encerrar com COMMIT e ROLLBACK**: Executar transações e controlar sua conclusão ou reversão utilizando COMMIT e ROLLBACK.
