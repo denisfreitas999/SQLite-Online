@@ -234,3 +234,44 @@ VALUES (451, 14, 1, 6.0),
 -- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 -- ################### ETAPA 05 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 -- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Por meio desse pragma, podemos modificar as configurações do nosso SQLite online. 
+-- Informamos a ele que desejamos validar nossas chaves estrangeiras, estabelecendo foreign_keys = ON.
+PRAGMA foreign_keys = ON
+
+SELECT * from produtos where id = 31;
+
+-- Atualizando dados
+UPDATE produtos SET preco = 13.0 WHERE id = 31;
+
+SELECT * from produtos where nome like 'Croissant%';
+
+UPDATE produtos SET descricao = 'Croissant recheado com amêndoa.' WHERE id = 28;
+
+-- Excluindo dados
+SELECT * FROM colaboradores;
+
+DELETE FROM colaboradores WHERE id = 3;
+
+SELECT * FROM clientes;
+
+-- DELETE FROM clientes WHERE id = 27;
+SELECT * FROM clientes WHERE ID = 27;
+SELECT * FROM pedidos WHERE idcliente = 27;
+SELECT * FROM itenspedidos WHERE idpedido = 451;
+DELETE FROM clientes WHERE id = 27;
+
+-- RECUPERAÇÃO DE DADOS COM TRANSAÇÃO E ROLLBACK E COMMIT
+BEGIN TRANSACTION;
+
+SELECT * FROM clientes;
+
+DELETE FROM clientes;
+
+SELECT * FROM Pedidos;
+
+UPDATE Pedidos SET Status = 'Concluído';
+
+ROLLBACK;
+
+COMMIT;
