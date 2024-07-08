@@ -2,7 +2,8 @@
 
 #### Course 01: SQLite online - Conhecendo instruções SQL (01 - 05)
 #### Course 02: SQLite Online - executando consultas SQL (06 - 10)
-#### Course 03: Realizando consultas com SQL: Joins, Views e transações (11 - 15)
+#### Course 03: SQLite Online - Realizando consultas com SQL: Joins, Views e transações (11 - 15)
+#### Course 04: SQLite online: análise de dados com SQL (16 - 20)
 
 ## Índice
 1. [Primeiros Passos com SQLite](#1-primeiros-passos-com-sqlite)
@@ -20,6 +21,11 @@
 13. [Joins: INNER, RIGHT, LEFT e FULL](#13-joins-inner-right-left-e-full)
 14. [VIEWs e TRIGGERs](#14-views-e-triggers)
 15. [Transações e Operações de Dados](#15-transações-e-operações-de-dados)
+16. [Carregando Banco de Dados e Consultas Básicas](#16-carregando-banco-de-dados-e-consultas-básicas)
+17. [Limitação e Filtragem de Dados](#17-limitação-e-filtragem-de-dados)
+18. [Preparação para Reuniões e Consultas Avançadas](#18-preparação-para-reuniões-e-consultas-avançadas)
+19. [Visualização e Comparação de Vendas](#19-visualização-e-comparação-de-vendas)
+20. [Análise Sazonal e Métricas de Vendas](#20-análise-sazonal-e-métricas-de-vendas)
 
 ## 1. Primeiros Passos com SQLite
 
@@ -144,3 +150,48 @@ Nesta etapa, foco na manipulação avançada de dados e no controle de transaç�
 - **Executar exclusão dos dados com o DELETE CASCADE**: Remover registros de tabelas com exclusão em cascata.
 - **Conhecer sobre transações**: Compreender o conceito de transações no contexto de bancos de dados.
 - **Iniciar transações e encerrar com COMMIT e ROLLBACK**: Executar transações e controlar sua conclusão ou reversão utilizando COMMIT e ROLLBACK.
+
+## 16. Carregando Banco de Dados e Consultas Básicas
+
+Nesta etapa, foco em carregar um banco de dados e realizar consultas básicas:
+
+- **Carregar um banco de dados via arquivo .db no SQLiteOnline**: Importar e acessar bancos de dados no formato .db.
+- **Entender o schema de um banco de dados e suas tabelas**: Compreender a estrutura do banco de dados e suas tabelas.
+- **Consultar todas as colunas de uma tabela usando o asterisco ***: Realizar consultas que retornam todas as colunas de uma tabela.
+- **Contar a quantidade de linhas ou registros em uma tabela com a função COUNT**: Utilizar a função COUNT para determinar o número de registros em uma tabela.
+
+## 17. Limitação e Filtragem de Dados
+
+Nesta etapa, foco na limitação e filtragem de dados em consultas SQL:
+
+- **Limitar o número de dados extraídos usando LIMIT**: Restringir a quantidade de resultados retornados por uma consulta.
+- **Extrair valores das datas com strftime**: Utilizar a função strftime para manipular e extrair partes de datas.
+- **Filtrar valores por datas combinando strftime e WHERE**: Aplicar filtros de datas em consultas utilizando a combinação de strftime e WHERE.
+
+## 18. Preparação para Reuniões e Consultas Avançadas
+
+Nesta etapa, foco na preparação para reuniões e em consultas SQL avançadas:
+
+- **Como se preparar para uma reunião transformando pautas em consultas**: Converter tópicos de reuniões em consultas SQL específicas.
+- **Responder questionamentos em uma reunião interpretando resultados de consultas**: Interpretar e responder perguntas com base nos resultados das consultas SQL.
+- **Utilizar o JOIN para trazer informações de outras tabelas**: Combinar dados de múltiplas tabelas utilizando o JOIN.
+- **Combinar dados com GROUP BY**: Agrupar dados com a cláusula GROUP BY.
+- **Ordenar dados com ORDER BY**: Organizar os resultados das consultas utilizando ORDER BY.
+
+## 19. Visualização e Comparação de Vendas
+
+Nesta etapa, foco na visualização e comparação de dados de vendas:
+
+- **Calcular o total de vendas através do tempo utilizando JOIN**: Utilizar JOIN para calcular o total de vendas ao longo do tempo.
+- **Criar uma visualização de total de vendas**: Gerar visualizações que representam o total de vendas.
+- **Criar uma tabela de comparação de vendas utilizando CASE WHEN**: Utilizar CASE WHEN para criar tabelas comparativas de vendas.
+- **Criar uma visualização de comparação entre fornecedores**: Comparar vendas entre diferentes fornecedores através de visualizações.
+- **Cálculo de porcentagem utilizando ROUND e subconsultas**: Calcular porcentagens usando ROUND e subconsultas para obter resultados precisos.
+
+## 20. Análise Sazonal e Métricas de Vendas
+
+Nesta etapa, foco na análise sazonal e na criação de métricas de vendas:
+
+- **Análise sazonal dos dados**: Examinar padrões sazonais nos dados de vendas.
+- **Calcular a porcentagem de vendas**: Determinar a porcentagem de vendas em relação a um total.
+- **Utilizar o comando WITH para criar nossa métrica de porcentagem de vendas**: Empregar o comando WITH para definir e calcular métricas de porcentagem de vendas.
