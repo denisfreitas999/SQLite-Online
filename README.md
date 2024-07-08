@@ -5,6 +5,11 @@
 #### Course 03: SQLite Online - Realizando consultas com SQL: Joins, Views e transações (11 - 15)
 #### Course 04: SQLite online: análise de dados com SQL (16 - 20)
 
+## Tecnologias Envolvidas
+<div style="display: inline_block">
+  <img align="center" alt="SQLite" src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white"/>
+</div>
+
 ## Índice
 1. [Primeiros Passos com SQLite](#1-primeiros-passos-com-sqlite)
 2. [Manipulação de Tabelas](#2-manipulação-de-tabelas)
