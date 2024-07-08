@@ -25,3 +25,16 @@ SELECT COUNT(*) as Qtd, 'Produtos' as Tabela FROM produtos
 UNION ALL
 SELECT COUNT(*) as Qtd, 'Vendas' as Tabela FROM vendas;
 
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 02 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Explorando dados utilizando o LIMIT para coletar uma amostra
+SELECT * FROM vendas LIMIT 5;
+
+-- Explorando itens por data 
+SELECT STRFTIME('%Y', data_venda) from vendas LIMIT 5;
+SELECT DISTINCT(STRFTIME('%Y', data_venda)) as ano, STRFTIME('%m', data_venda) as mes ,COUNT(id_venda) as total_vendas FROM vendas
+    WHERE Mes = '01' OR Mes = '11' OR Mes = '12'
+    GROUP by ano, mes
+	ORDER by ano;
