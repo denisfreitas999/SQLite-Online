@@ -177,4 +177,4 @@ FROM(
     mva.Media_Qtd_Vendas,
     va.Qtd_Vendas_Atual,
     ROUND((va.Qtd_Vendas_Atual - mva.Media_Qtd_Vendas)/mva.Media_Qtd_Vendas *100.0, 2) || '%' AS Porcentagem
-    FROM Vendas_Atual va, Media_Vendas_Anteriores mva
+    FROM Vendas_Atual va, Media_Vendas_Anteriores mva 
