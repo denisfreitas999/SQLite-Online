@@ -82,3 +82,61 @@ JOIN fornecedores f ON f.id_fornecedor = p.fornecedor_id
 WHERE f.nome='NebulaNetworks'
 GROUP BY Ano_Mes
 ORDER BY Ano_Mes, Qtd_Vendas;
+
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ################### ETAPA 04 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+-- ###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-- Tabela de comparação entre as duas melhores com a que teve o menor desempenho na BF
+SELECT Ano_Mes,
+ SUM(CASE WHEN Nome_Fornecedor=='NebulaNetworks' THEN Qtd_Vendas ELSE 0 END) AS Qtd_Vendas_NebulaNetworks,
+ SUM(CASE WHEN Nome_Fornecedor=='HorizonDistributors' THEN Qtd_Vendas ELSE 0 END) AS Qtd_Vendas_HorizonDistributors,
+ SUM(CASE WHEN Nome_Fornecedor=='AstroSupply' THEN Qtd_Vendas ELSE 0 END) AS Qtd_Vendas_AstroSupply
+ FROM(
+   SELECT strftime('%Y/%m', v.data_venda) AS Ano_Mes, f.nome AS Nome_Fornecedor, COUNT(iv.produto_id) AS Qtd_Vendas
+   from itens_venda iv
+   JOIN vendas v ON v.id_venda = iv.venda_id
+   JOIN produtos p ON p.id_produto = iv.produto_id
+   JOIN fornecedores f ON f.id_fornecedor = p.fornecedor_id
+   WHERE Nome_Fornecedor='NebulaNetworks' OR Nome_Fornecedor='HorizonDistributors' OR Nome_Fornecedor='AstroSupply'
+   GROUP BY Nome_Fornecedor, Ano_Mes
+   ORDER BY Ano_Mes, Qtd_Vendas
+  )
+  GROUP BY Ano_Mes;
+
+-- Categoria / Quantidade de vendas / porcentagem 
+SELECT Nome_Categoria, Qtd_Vendas, ROUND(100.0*Qtd_Vendas/(SELECT COUNT(*) FROM itens_venda), 2) || '%' AS Porcentagem
+FROM(
+    SELECT c.nome_categoria AS Nome_Categoria, COUNT(iv.produto_id) AS Qtd_Vendas
+    FROM itens_venda iv
+    JOIN vendas v ON v.id_venda = iv.venda_id
+    JOIN produtos p ON p.id_produto = iv.produto_id
+    JOIN categorias c ON c.id_categoria = p.categoria_id
+    GROUP BY Nome_Categoria
+    ORDER BY Qtd_Vendas DESC
+    );
+
+-- Fornecedor, Quantidade de vendas e porcentagem
+
+SELECT Nome_Fornecedor, Qtd_Vendas, ROUND(100.0 * Qtd_Vendas / (SELECT COUNT(*) FROM itens_venda), 2) || '%' AS Porcentagem
+FROM(
+    SELECT f.nome AS Nome_Fornecedor, COUNT(iv.produto_id) AS Qtd_Vendas
+    FROM itens_venda iv
+    JOIN vendas v ON v.id_venda = iv.venda_id
+    JOIN produtos p ON p.id_produto = iv.produto_id
+    JOIN fornecedores f ON f.id_fornecedor = p.fornecedor_id
+    GROUP BY Nome_Fornecedor
+    ORDER BY Qtd_Vendas DESC
+    );
+
+-- Nome Marca, Quantidade de Vendas e Porcentagem
+SELECT Nome_Marca, Qtd_Vendas, ROUND(100.0 * Qtd_Vendas / (SELECT COUNT(*) FROM itens_venda), 2) || '%' AS Porcentagem
+FROM(
+    SELECT m.nome AS Nome_Marca, COUNT(iv.produto_id) AS Qtd_Vendas
+    FROM itens_venda iv
+    JOIN vendas v ON v.id_venda = iv.venda_id
+    JOIN produtos p ON p.id_produto = iv.produto_id
+    JOIN marcas m ON m.id_marca = p.marca_id
+    GROUP BY Nome_Marca
+    ORDER BY Qtd_Vendas DESC
+    );
